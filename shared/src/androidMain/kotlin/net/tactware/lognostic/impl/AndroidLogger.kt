@@ -21,11 +21,17 @@ class AndroidLogger(private val defaultTag: String = "App") : Logger {
     fun logWithTag(level: LogLevel, tag: String, message: String, throwable: Throwable?) {
         when (level) {
             LogLevel.VERBOSE -> Log.v(tag, message, throwable)
+            LogLevel.V -> Log.v(tag, message, throwable)
             LogLevel.DEBUG -> Log.d(tag, message, throwable)
+            LogLevel.D -> Log.d(tag, message, throwable)
             LogLevel.INFO -> Log.i(tag, message, throwable)
+            LogLevel.I -> Log.i(tag, message, throwable)
             LogLevel.WARN -> Log.w(tag, message, throwable)
+            LogLevel.W -> Log.w(tag, message, throwable)
             LogLevel.ERROR -> Log.e(tag, message, throwable)
+            LogLevel.E -> Log.e(tag, message, throwable)
             LogLevel.FATAL -> Log.wtf(tag, message, throwable)
+            LogLevel.F -> Log.wtf(tag, message, throwable)
         }
     }
 }
