@@ -4,11 +4,17 @@ package net.tactware.lognostic
  * Represents the severity level of a log message.
  */
 enum class LogLevel(val priority: Int) {
+    V(2),
     VERBOSE(2),
+    D(3),
     DEBUG(3),
+    I(4),
     INFO(4),
+    W(5),
     WARN(5),
+    E(6),
     ERROR(6),
+    F(7),
     FATAL(7)
 }
 
@@ -17,9 +23,13 @@ enum class LogLevel(val priority: Int) {
  * This is useful for advanced filtering, separate from standard log levels.
  */
 enum class LogImportance(val weight: Int) {
+    L(1),
     LOW(1),
+    M(2),
     MEDIUM(2),
+    H(3),
     HIGH(3),
+    C(4),
     CRITICAL(4)
 }
 
@@ -67,4 +77,71 @@ interface AdvancedLogger : Logger {
     override fun log(level: LogLevel, message: String, throwable: Throwable?) {
         log(level, null, LogImportance.MEDIUM, message, throwable)
     }
+
+    fun v(tag: String?=null, importance: LogImportance = LogImportance.MEDIUM, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.VERBOSE, tag=tag, importance = importance, message, throwable)
+    fun v_l(tag: String?=null, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.VERBOSE, tag=tag, importance = LogImportance.LOW, message, throwable)
+    fun v_m(tag: String?=null, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.VERBOSE, tag=tag, importance = LogImportance.MEDIUM, message, throwable)
+    fun v_h(tag: String?=null, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.VERBOSE, tag=tag, importance = LogImportance.HIGH, message, throwable)
+    fun v_c(tag: String?=null, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.VERBOSE, tag=tag, importance = LogImportance.CRITICAL, message, throwable)
+
+    fun d(tag: String?=null, importance: LogImportance = LogImportance.MEDIUM, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.DEBUG, tag=tag, importance = importance, message, throwable)
+    fun d_l(tag: String?=null, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.DEBUG, tag=tag, importance = LogImportance.LOW, message, throwable)
+    fun d_m(tag: String?=null, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.DEBUG, tag=tag, importance = LogImportance.MEDIUM, message, throwable)
+    fun d_h(tag: String?=null, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.DEBUG, tag=tag, importance = LogImportance.HIGH, message, throwable)
+    fun d_c(tag: String?=null, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.DEBUG, tag=tag, importance = LogImportance.CRITICAL, message, throwable)
+
+    fun i(tag: String?=null, importance: LogImportance = LogImportance.MEDIUM, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.INFO, tag=tag, importance = importance, message, throwable)
+    fun i_l(tag: String?=null, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.INFO, tag=tag, importance = LogImportance.LOW, message, throwable)
+    fun i_m(tag: String?=null, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.INFO, tag=tag, importance = LogImportance.MEDIUM, message, throwable)
+    fun i_h(tag: String?=null, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.INFO, tag=tag, importance = LogImportance.HIGH, message, throwable)
+    fun i_c(tag: String?=null, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.INFO, tag=tag, importance = LogImportance.CRITICAL, message, throwable)
+
+    fun w(tag: String?=null, importance: LogImportance = LogImportance.MEDIUM, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.WARN, tag=tag, importance = importance, message, throwable)
+    fun w_l(tag: String?=null, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.WARN, tag=tag, importance = LogImportance.LOW, message, throwable)
+    fun w_m(tag: String?=null, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.WARN, tag=tag, importance = LogImportance.MEDIUM, message, throwable)
+    fun w_h(tag: String?=null, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.WARN, tag=tag, importance = LogImportance.HIGH, message, throwable)
+    fun w_c(tag: String?=null, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.WARN, tag=tag, importance = LogImportance.CRITICAL, message, throwable)
+
+
+    fun e(tag: String?=null, importance: LogImportance = LogImportance.MEDIUM, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.ERROR, tag=tag, importance = importance, message, throwable)
+    fun e_l(tag: String?=null, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.ERROR, tag=tag, importance = LogImportance.LOW, message, throwable)
+    fun e_m(tag: String?=null, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.ERROR, tag=tag, importance = LogImportance.MEDIUM, message, throwable)
+    fun e_h(tag: String?=null, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.ERROR, tag=tag, importance = LogImportance.HIGH, message, throwable)
+    fun e_c(tag: String?=null, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.ERROR, tag=tag, importance = LogImportance.CRITICAL, message, throwable)
+
+    fun wtf(tag: String?=null, importance: LogImportance = LogImportance.MEDIUM, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.FATAL, tag=tag, importance = importance, message, throwable)
+    fun wtf_l(tag: String?=null, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.FATAL, tag=tag, importance = LogImportance.LOW, message, throwable)
+    fun wtf_m(tag: String?=null, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.FATAL, tag=tag, importance = LogImportance.MEDIUM, message, throwable)
+    fun wtf_h(tag: String?=null, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.FATAL, tag=tag, importance = LogImportance.HIGH, message, throwable)
+    fun wtf_c(tag: String?=null, message: String, throwable: Throwable? = null) =
+        log(level = LogLevel.FATAL, tag=tag, importance = LogImportance.CRITICAL, message, throwable)
 }
